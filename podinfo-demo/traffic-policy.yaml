@@ -1,0 +1,24 @@
+apiVersion: kuma.io/v1alpha1
+kind: TrafficRoute
+metadata:
+  name: version-traffic
+  namespace: kong-podinfo
+mesh: default
+spec:
+  sources:
+  - match:
+      service: podinfo.kong-podinfo.svc:9898
+  destinations:
+  - match:
+      service: podinfo.kong-podinfo.svc:9898
+  conf:
+  # it is NOT a percentage. just a positive weight
+  - weight: 50
+    destination:
+      service: podinfo.kong-podinfo.svc:9898
+      version: v0
+  # we're NOT checking if total of all weights is 100
+  - weight: 50
+    destination:
+      service: podinfo.kong-podinfo.svc:9898
+      version: v1

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kong-podinfo
+  namespace: kong-podinfo
+  annotations:
+    kuma.io/sidecar-injection: enabled

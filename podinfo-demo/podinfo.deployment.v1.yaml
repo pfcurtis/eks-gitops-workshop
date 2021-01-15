@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podinfo-v1
+  namespace: kong-podinfo
+  labels:
+    app: podinfo
+spec:
+  replicas: 1
+  minReadySeconds: 1
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 60
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: podinfo
+      version: v1
+      env: prod
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9797"
+        revision: "test.1"
+      labels:
+        app: podinfo
+        version: v1
+        env: prod
+    spec:
+      containers:
+        - name: podinfod
+          image: stefanprodan/podinfo:3.1.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PODINFO_UI_LOGO
+              value: https://raw.githubusercontent.com/pfcurtis/eks-gitops-workshop/master/weaveIcon_colour_logo_POS_RGB_250x250.png
+            - name: PODINFO_UI_COLOR
+              value: "red"
+          ports:
+            - containerPort: 9898
+              name: http
+              protocol: TCP
+          command:
+            - ./podinfo
+            - --port=9898
+            - --port-metrics=9797
+            - --level=info
+            - --random-delay=false
+            - --random-error=false
+          livenessProbe:
+            exec:
+              command:
+                - podcli
+                - check
+                - http
+                - localhost:9898/healthz
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+                - podcli
+                - check
+                - http
+                - localhost:9898/readyz
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 100m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 32Mi
