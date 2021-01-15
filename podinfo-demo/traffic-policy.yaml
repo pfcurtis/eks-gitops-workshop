@@ -3,6 +3,7 @@ kind: TrafficRoute
 mesh: default
 metadata:
   name: route-example
+  namespace: kong-podinfo
 spec:
   sources:
     - match:
