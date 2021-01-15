@@ -5,6 +5,8 @@ metadata:
   namespace: kong-podinfo
   labels:
     app: podinfo
+    version: v1
+    env: dev
 spec:
   replicas: 1
   minReadySeconds: 1
@@ -18,7 +20,7 @@ spec:
     matchLabels:
       app: podinfo
       version: v1
-      env: prod
+      env: dev
   template:
     metadata:
       annotations:
@@ -28,7 +30,7 @@ spec:
       labels:
         app: podinfo
         version: v1
-        env: prod
+        env: dev
     spec:
       containers:
         - name: podinfod

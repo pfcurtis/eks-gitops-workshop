@@ -5,6 +5,8 @@ metadata:
   namespace: kong-podinfo
   labels:
     app: podinfo
+    version: v0
+    env: prod
 spec:
   replicas: 1
   minReadySeconds: 1
