@@ -12,7 +12,7 @@ spec:
         kuma.io/service: podinfo_kong-podinfo_svc_9898
   conf:
     split:
-      - weight: 50
+      - weight: 0
         destination:
           kuma.io/service: podinfo_kong-podinfo_svc_9898
           version: 'v0'
