@@ -7,21 +7,21 @@ mesh: default
 spec:
   sources:
     - match:
-        kuma.io/service: frontend_kuma-demo_svc:80
+        kuma.io/service: frontend_kuma-demo_svc_80
   destinations:
     - match:
-        kuma.io/service: backend_kuma-demo_svc:3001
+        kuma.io/service: backend_kuma-demo_svc_3001
   conf:
     split:
     - weight: 80
       destination:
-        kuma.io/service: backend_kuma-demo_svc:3001
+        kuma.io/service: backend_kuma-demo_svc_3001
         version: 'v0'
     - weight: 20
       destination:
-        kuma.io/service: backend_kuma-demo_svc:3001
+        kuma.io/service: backend_kuma-demo_svc_3001
         version: 'v1'
     - weight: 0
       destination:
-        kuma.io/service: backend_kuma-demo_svc:3001
+        kuma.io/service: backend_kuma-demo_svc_3001
         version: 'v2'
