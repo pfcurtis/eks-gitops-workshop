@@ -7,13 +7,13 @@ metadata:
 spec:
   sources:
     - match:
-        kuma.io/service: podinfo_kong-podinfo_svc_9898
+        kuma.io/service: kong-proxy_kong_svc_80
   destinations:
     - match:
         kuma.io/service: podinfo_kong-podinfo_svc_9898
   conf:
     split:
-      - weight: 0
+      - weight: 50
         destination:
           kuma.io/service: podinfo_kong-podinfo_svc_9898
           version: 'v0'
