@@ -40,7 +40,7 @@ spec:
             - name: PODINFO_UI_LOGO
               value: https://raw.githubusercontent.com/pfcurtis/eks-gitops-workshop/master/weaveIcon_colour_logo_POS_RGB_250x250.png
             - name: PODINFO_UI_COLOR
-              value: "purple"
+              value: "green"
           ports:
             - containerPort: 9898
               name: http
