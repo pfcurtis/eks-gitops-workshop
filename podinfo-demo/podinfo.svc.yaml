@@ -5,6 +5,7 @@ metadata:
   namespace: kong-podinfo
   annotations:
     9898.service.kuma.io/protocol: "http"
+    ingress.kubernetes.io/service-upstream: "true"
 spec:
   selector:
     app: podinfo
