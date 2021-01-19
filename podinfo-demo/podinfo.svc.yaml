@@ -6,7 +6,6 @@ metadata:
   annotations:
     9898.service.kuma.io/protocol: "http"
 spec:
-  type: NodePort
   selector:
     app: podinfo
   ports:
